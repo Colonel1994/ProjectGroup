@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "505312639621",
+    "project_id": "project--8248873812399364949"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505312639621:android:d3619748540d5829",
+        "android_client_info": {
+          "package_name": "dollar.com.travel_v"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505312639621-luja9v2os2asdbqbq2hh58lv3t7jcsg2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dollar.com.travel_v",
+            "certificate_hash": "1AEBE2BE89DDC38DB36DB2FFBB86F1856657D7E7"
+          }
+        },
+        {
+          "client_id": "505312639621-df2pj36s9n48fe6dg3fk2k45odcp5a3t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi1qFI9phnBMa2eVdKFIHdU1J1DJnI5rE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

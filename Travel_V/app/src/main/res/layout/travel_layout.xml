@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:weightSum="4"
+    android:background="#ddf5f2f2"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <ImageButton
+            android:layout_centerInParent="true"
+            android:src="@drawable/img_bac"
+            android:background="@drawable/bg_button"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:paddingBottom="0dp"
+            android:id="@+id/btn_bac"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:text="@string/mien_bac"
+            android:textSize="24sp"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <ImageButton
+            android:src="@drawable/img_trung"
+            android:background="@drawable/bg_button"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:scaleType="fitXY"
+            android:paddingTop="1dp"
+            android:paddingBottom="0dp"
+            android:id="@+id/btn_trung"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:text="@string/mien_trung"
+            android:textSize="24sp"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageButton
+            android:src="@drawable/img_nam"
+            android:background="@drawable/bg_button"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:paddingTop="0dp"
+            android:id="@+id/btn_nam"
+            tools:ignore="ContentDescription"/>
+        <TextView
+            android:text="@string/mien_nam"
+            android:textSize="24sp"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

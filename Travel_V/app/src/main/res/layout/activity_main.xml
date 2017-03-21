@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context="dollar.com.travel_v.MainActivity">
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.83">
+        <include layout="@layout/travel_home"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_weight="0.17"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#e0e0e0">
+
+            <ImageView
+                android:id="@+id/btn_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_home"
+                android:padding="8dp"
+                android:onClick="onClick" />
+
+            <ImageView
+                android:id="@+id/btn_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_search"
+                android:padding="8dp"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_bookmark"
+                android:padding="8dp"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_more_horiz"
+                android:padding="8dp"/>
+        </LinearLayout>
+        <ImageButton
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="74dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_button_add"
+            android:src="@drawable/ic_add_circle"
+            android:id="@+id/btn_add" />
+    </RelativeLayout>
+
+</LinearLayout>

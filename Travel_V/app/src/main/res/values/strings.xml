@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Travel V</string>
+    <string name="facebook_app_id">1906991912857378</string>
+    <string name="mien_bac">Miền Bắc</string>
+    <string name="mien_trung">Miền Trung</string>
+    <string name="mien_nam">Miền Nam</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+</resources>
