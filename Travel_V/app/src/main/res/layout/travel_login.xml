@@ -36,12 +36,12 @@
         android:weightSum="1">
 
         <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
+            android:id="@+id/btn_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <com.google.android.gms.common.SignInButton
-            android:id="@+id/btnSignIn"
+            android:id="@+id/btn_google"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_marginTop="32dp"

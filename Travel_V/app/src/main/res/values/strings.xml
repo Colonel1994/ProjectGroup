@@ -5,4 +5,6 @@
     <string name="mien_trung">Miền Trung</string>
     <string name="mien_nam">Miền Nam</string>
     <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="loading">Loading...</string>
+    <string name="signed_out">signed_out</string>
 </resources>
