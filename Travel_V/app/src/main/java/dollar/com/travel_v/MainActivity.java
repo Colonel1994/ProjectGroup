@@ -1,5 +1,6 @@
 package dollar.com.travel_v;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -7,21 +8,23 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private HomeFragment homeFragment;
-    private TravelFragment travelFragment;
+    private TravelActivity travelActivity;
     private MoneyFragment moneyFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initComponents();
     }
+
     private void initComponents() {
         findViewById(R.id.btn_home).setOnClickListener(this);
         findViewById(R.id.btn_search).setOnClickListener(this);
         findViewById(R.id.btn_travel).setOnClickListener(this);
         findViewById(R.id.btn_money).setOnClickListener(this);
 
-        if (homeFragment == null){
+        if (homeFragment == null) {
             homeFragment = new HomeFragment();
         }
         replaceFragment(homeFragment);
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_home:
                 replaceFragment(homeFragment);
                 break;
@@ -60,15 +63,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_travel:
-                /*rlct.setVisibility(View.GONE);
-                rltv.setVisibility(View.VISIBLE);*/
-                if (travelFragment == null){
-                    travelFragment = new TravelFragment();
-                }
-                replaceFragment(travelFragment);
+                Intent intent = new Intent(this, TravelActivity.class);
+                startActivity(intent);
                 break;
+
             case R.id.btn_money:
-                if (moneyFragment == null){
+                if (moneyFragment == null) {
                     moneyFragment = new MoneyFragment();
                 }
                 replaceFragment(moneyFragment);
@@ -82,4 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
 }
