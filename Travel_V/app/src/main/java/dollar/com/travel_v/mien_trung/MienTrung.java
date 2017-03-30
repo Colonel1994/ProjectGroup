@@ -1,27 +1,24 @@
-package dollar.com.travel_v;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+package dollar.com.travel_v.mien_trung;
 
 /**
- * Created by anhch_000 on 21/03/2017.
+ * Created by anhch_000 on 30/03/2017.
  */
 
-public class MienBac {
+public class MienTrung {
 
     private int id;
-    private Bitmap image;
+    private String image;
     private String name;
     private String title;
 
-    public MienBac(int id, Bitmap image, String name, String title) {
+    public MienTrung(int id, String image, String name, String title) {
         this.id = id;
         this.image = image;
         this.name = name;
         this.title = title;
     }
 
-    public MienBac() {
+    public MienTrung() {
 
     }
 
@@ -33,11 +30,11 @@ public class MienBac {
         this.id = id;
     }
 
-    public Bitmap getImage() {
+    public String getImageString() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -57,13 +54,7 @@ public class MienBac {
         this.title = title;
     }
 
-    public Bitmap getImageBitMap() {
 
-        if (image == null){
-            return BitmapFactory.decodeResource(App.getContext().getResources(), R.drawable.banana);
-        } else {
-            return image;
-        }
-    }
+
 
 }

@@ -3,21 +3,18 @@
  
     function dispInfo(){
         $db = new Database();
-        $db->prepare('SELECT * FROM tltmienbac');
+        $db->prepare('SELECT * FROM tblmienbac');
         
-        $response["quanLyMienBac"] = array();
+        $response["tblmienbac"] = array();
         
         foreach($db->getArray() as $row){ 
             $t = array();
             $t["id"] = $row["ID"];
-            $t["image"] = base64_encode($row[ "IMAGE"]);
+            $t["image"] = $row[ "IMAGE"];
             $t["name"] = $row["NAME"];
             $t["title"] = $row["TITLE"];
-            
-            
-            
-            
-            array_push($response["quanLyMienBac"], $t);
+      
+            array_push($response["tblmienbac"], $t);
         }
         header('Content-Type: application/json');
     
