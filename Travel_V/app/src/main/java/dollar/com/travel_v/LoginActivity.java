@@ -12,9 +12,22 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -28,6 +41,8 @@ import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class LoginActivity extends FragmentActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "LoginActivity";
@@ -41,13 +56,14 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private ImageView imgAvatar;
     private Intent intent;
 
-    /*private TextView tvName;
-    private LoginButton btnFaceboook;
+    private TextView tvName;
+    private Button btnFaceboook;
     private CallbackManager mCallbackManager;
 
     private Profile profile;
-    private AccessTokenTracker tokenTracker;
-    private ProfileTracker profileTracker;*/
+    private AccessTokenTracker accessTokenTracker;
+    private AccessToken accessToken;
+    private ProfileTracker profileTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,33 +76,14 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         imgAvatar = (ImageView) findViewById(R.id.img_avatar);
         txtStatus = (TextView) findViewById(R.id.tv_status);
 
-        /*tvName = (TextView)findViewById(R.id.tv_name);*/
-        findViewById(R.id.btnSignIn).setOnClickListener(this);
+        tvName = (TextView)findViewById(R.id.tv_name);
+
+        findViewById(R.id.btn_login_google).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.disconnect_button).setOnClickListener(this);
+        findViewById(R.id.btn_login_facebook).setOnClickListener(this);
 
-
-        /*FacebookSdk.sdkInitialize(getApplicationContext());
-        mCallbackManager = CallbackManager.Factory.create();
-
-        btnFaceboook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                tvName.setText("User ID:"+loginResult.getAccessToken().getUserId()
-                +"\n"+"Auth Token:"+loginResult.getAccessToken().getToken());
-            }
-
-            @Override
-            public void onCancel() {
-                tvName.setText("Đăng nhập đã bị hủy bỏ !");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                tvName.setText("Login attempt failed !");
-            }
-        });*/
-
+        loginFacebook();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -97,34 +94,70 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        signInButton = (SignInButton) findViewById(R.id.btnSignIn);
+        signInButton = (SignInButton) findViewById(R.id.btn_login_google);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
         signInButton.setScopes(gso.getScopeArray());
 
-
-        /*tokenTracker = new AccessTokenTracker() {
+    }
+    private void loginFacebook(){
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            protected void onCurrentAccessTokenChanged(AccessToken accessToken, AccessToken accessToken1) {
+            public void onSuccess(LoginResult loginResult) {
+                tvName.setText("User ID:"+loginResult.getAccessToken().getUserId()
+                        +"\n"+"Auth Token:"+loginResult.getAccessToken().getToken());
+                Toast.makeText(getBaseContext(),"Login successful !",Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onCancel() {
+                Toast.makeText(getBaseContext(),"Login has been canceled !",Toast.LENGTH_SHORT).show();
+                /*tvName.setText("Đăng nhập đã bị hủy bỏ !");*/
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(getBaseContext(),"Login failed !",Toast.LENGTH_SHORT).show();
+                /*tvName.setText("Login attempt failed !");*/
+            }
+        });
+        LoginManager.getInstance().logInWithPublishPermissions(this, Arrays.asList("publish_actions"));
+
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(
+                    AccessToken oldAccessToken,
+                    AccessToken currentAccessToken) {
+                // Đã đăng nhập, lưu accessToken lại và làm việc sau khi đăng nhập
+                accessToken = currentAccessToken;
             }
         };
+        // If the access token is available already assign it.
+        accessToken = AccessToken.getCurrentAccessToken();
+
         profileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile profile, Profile profile1) {
                 tvName.setText(displayMessage(profile1));
             }
         };
+        accessTokenTracker.startTracking();
+        profileTracker.startTracking();
+    }
 
-        tokenTracker.startTracking();
-        profileTracker.startTracking();*/
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        accessTokenTracker.stopTracking();
+        profileTracker.stopTracking();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        /*mCallbackManager.onActivityResult(requestCode, resultCode, data);*/
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -162,21 +195,21 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         }
     };*/
 
-   /* @Override
+    @Override
     public void onResume() {
         super.onResume();
         Profile profile = Profile.getCurrentProfile();
-        tvName.setText(displayMessage(profile));
-    }*/
+        /*tvName.setText(displayMessage(profile));*/
+    }
 
     /*@Override
     public void onStop() {
         super.onStop();
         profileTracker.stopTracking();
-        tokenTracker.stopTracking();
+        accessTokenTracker.stopTracking();
     }*/
 
-    /*private String displayMessage(Profile profile) {
+    private String displayMessage(Profile profile) {
         StringBuilder stringBuilder = new StringBuilder();
         if (profile != null) {
             stringBuilder.append("Logged In " + profile.getFirstName());
@@ -185,30 +218,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             stringBuilder.append("You are not logged in");
         }
         return stringBuilder.toString();
-    }*/
-
-    /*private void replaceFragment(Fragment fragment) {
-        Fragment f = getSupportFragmentManager()
-                .findFragmentByTag(fragment.getClass().getName());
-        if (f != null && f == fragment) {
-            if (fragment.isVisible()) {
-                return;
-            }
-            getSupportFragmentManager().beginTransaction()
-                    .show(fragment)
-                    .commit();
-            return;
-        }
-
-        getSupportFragmentManager().popBackStack();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.show, fragment, fragment.getClass().getName())
-                .addToBackStack(null)
-                .commit();
-        *//*getSupportFragmentManager().beginTransaction()
-                .add(R.id.content, fragment).show(fragment)
-                .commit();*//*
-    }*/
+    }
 
     @Override
     protected void onStart() {
@@ -219,7 +229,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             GoogleSignInResult result = opr.get();
             handleSignInResult(result);
         } else {
-            hideProgressDialog();
+            showProgressDialog();
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
                 public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
@@ -331,12 +341,12 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
         private void updateUI(boolean signedIn) {
             if (signedIn) {
-                findViewById(R.id.btnSignIn).setVisibility(View.GONE);
+                findViewById(R.id.btn_login_google).setVisibility(View.GONE);
                 findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
             } else {
                 txtStatus.setText(R.string.signed_out);
 
-                findViewById(R.id.btnSignIn).setVisibility(View.VISIBLE);
+                findViewById(R.id.btn_login_google).setVisibility(View.VISIBLE);
                 findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
             }
         }
@@ -349,7 +359,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.btnSignIn:
+                case R.id.btn_login_google:
                     signIn();
                     break;
                 case R.id.sign_out_button:
@@ -357,6 +367,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                     break;
                 case R.id.disconnect_button:
                     revokeAccess();
+                    break;
+                case R.id.btn_login_facebook:
+                    loginFacebook();
                     break;
                 default:
                     break;
