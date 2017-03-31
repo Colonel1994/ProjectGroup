@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -83,8 +84,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         findViewById(R.id.disconnect_button).setOnClickListener(this);
         findViewById(R.id.btn_login_facebook).setOnClickListener(this);
 
-        loginFacebook();
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -96,6 +95,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
         signInButton = (SignInButton) findViewById(R.id.btn_login_google);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
+        signInButton.setBackgroundColor(SignInButton.COLOR_AUTO);
+        signInButton.setColorScheme(SignInButton.COLOR_AUTO);
         signInButton.setScopes(gso.getScopeArray());
 
     }
@@ -108,6 +109,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 tvName.setText("User ID:"+loginResult.getAccessToken().getUserId()
                         +"\n"+"Auth Token:"+loginResult.getAccessToken().getToken());
                 Toast.makeText(getBaseContext(),"Login successful !",Toast.LENGTH_SHORT).show();
+
+                startActivity(intent);
             }
 
             @Override
@@ -198,7 +201,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-        Profile profile = Profile.getCurrentProfile();
+        /*Profile profile = Profile.getCurrentProfile();*/
         /*tvName.setText(displayMessage(profile));*/
     }
 
@@ -229,7 +232,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             GoogleSignInResult result = opr.get();
             handleSignInResult(result);
         } else {
-            showProgressDialog();
+            /*showProgressDialog();*/
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
                 public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
@@ -261,9 +264,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            if (acct.getPhotoUrl()!=null){
+            /*if (acct.getPhotoUrl()!=null){
                 new LoadProfileImage(imgAvatar).execute(acct.getPhotoUrl().toString());
-            }
+            }*/
 
             txtStatus.setText(acct.getDisplayName() + "\n" + acct.getEmail());
 
@@ -271,7 +274,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
             intent = new Intent(this,MainActivity.class);
 
-            /*intent.putExtra("Name",Name);*/
+            intent.putExtra("Name",Name);
             startActivity(intent);
 
             updateUI(true);

@@ -1,17 +1,12 @@
-package dollar.com.travel_v;
-
+package dollar.com.travel_v.mien_trung;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -20,20 +15,26 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import dollar.com.travel_v.API;
+import dollar.com.travel_v.App;
+import dollar.com.travel_v.R;
+
 /**
- * Created by anhch_000 on 21/03/2017.
+ * Created by anhch_000 on 30/03/2017.
  */
 
-public class MienBacActivity extends Activity {
+public class MienTrungActivity extends Activity {
 
     private RecyclerView recyclerView;
 
-    private MienBacAdapter mienBacAdapter;
+    private MienTrungAdapter mienTrungAdapter;
 
-    private ArrayList<MienBac> mienBacs;
+    private ArrayList<MienTrung> mienTrungs;
+
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.travel_layout_mien_bac);
         init();
@@ -41,8 +42,8 @@ public class MienBacActivity extends Activity {
 
     private void init() {
         new GetDataAsynTask().execute();
-        mienBacs = new ArrayList<MienBac>();
-        mienBacAdapter = new MienBacAdapter();
+        mienTrungs = new ArrayList<>();
+        mienTrungAdapter = new MienTrungAdapter(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_layout_bac);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -55,7 +56,7 @@ public class MienBacActivity extends Activity {
 
         @Override
         protected void onPreExecute() {
-            progressDialog = new ProgressDialog(MienBacActivity.this);
+            progressDialog = new ProgressDialog(MienTrungActivity.this);
             progressDialog.setMessage("chờ tý nha ...");
             progressDialog.setCancelable(false);
             progressDialog.setIndeterminate(true);
@@ -66,8 +67,8 @@ public class MienBacActivity extends Activity {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             if (aBoolean) {
-                mienBacAdapter.setMienBacs(mienBacs);
-                recyclerView.setAdapter(mienBacAdapter);
+                mienTrungAdapter.setMienTrungs(mienTrungs);
+                recyclerView.setAdapter(mienTrungAdapter);
             } else {
                 Toast.makeText(App.getContext(), "Faile.....!", Toast.LENGTH_SHORT).show();
             }
@@ -87,19 +88,19 @@ public class MienBacActivity extends Activity {
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = (JSONObject) jsonArray.get(i);
-                        MienBac mienBac = new MienBac();
-                        mienBac.setId(object.getInt("id"));
-                        if (!TextUtils.isEmpty(object.getString("image"))) {
+                        MienTrung mienTrung = new MienTrung();
+                        mienTrung.setId(object.getInt("id"));
+                        /*if (!TextUtils.isEmpty(object.getString("image"))) {
                             byte[] bytes = Base64.decode(object.getString("image"), Base64.DEFAULT);
 
                             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
                             mienBac.setImage(bitmap);
-                        }
-                        mienBac.setName(object.getString("name"));
-                        mienBac.setTitle(object.getString("title"));
-
-                        mienBacs.add(mienBac);
+                        }*/
+                        mienTrung.setName(object.getString("name"));
+                        mienTrung.setTitle(object.getString("title"));
+                        mienTrung.setImage(object.getString("image"));
+                        mienTrungs.add(mienTrung);
                     }
                     return true;
                 } catch (JSONException e) {

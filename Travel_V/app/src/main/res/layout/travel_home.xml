@@ -9,68 +9,61 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#d00">
+        android:background="#1826b3">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="Tranvel V"
+            android:text="Travel V"
             android:textAllCaps="true"
-            android:textColor="#ffea00"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="LoGo"
-            android:textAllCaps="true"
-            android:textColor="#000000"
-            android:textSize="24sp" />
+            android:textColor="#ffffff"
+            android:textSize="32sp" />
 
     </RelativeLayout>
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/play_video"
+        android:scaleType="fitEnd"
+        android:background="@drawable/ic_youtube"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="2">
-
-        <VideoView
-            android:id="@+id/video_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
+    </ImageView>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="5dp"
         android:layout_weight="1">
 
         <Button
             android:id="@+id/btn_travel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
             android:layout_weight="1"
-            android:background="#e100ff"
+            android:background="@drawable/bg_button_travel"
             android:gravity="center"
+            android:onClick="onClick"
             android:text="travel"
-            android:textSize="32sp"
-            android:onClick="onClick">
-        </Button>
+            android:textColor="#ffffff"
+            android:textSize="32sp"></Button>
 
         <Button
             android:id="@+id/btn_money"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#00ffe5"
+            android:background="@drawable/bg_button_travel"
             android:gravity="center"
-            android:text="money"
             android:onClick="onClick"
-            android:textSize="32sp">
-        </Button>
+            android:text="money"
+            android:layout_marginLeft="3dp"
+            android:textColor="#ffffff"
+            android:textSize="32sp"></Button>
 
     </TableRow>
 
@@ -78,5 +71,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:background="#41dc17"></RelativeLayout>
+        android:background="#1826b3">
+    </RelativeLayout>
 </LinearLayout>

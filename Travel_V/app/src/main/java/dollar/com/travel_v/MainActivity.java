@@ -1,5 +1,9 @@
 package dollar.com.travel_v;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.content.Intent;
@@ -10,12 +14,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imvAvatar;
     private LoginFragment loginFragment;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,28 +56,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initComponents() {
-        tvName = (TextView)findViewById(R.id.tv_name);
-        imvAvatar = (ImageView)findViewById(R.id.img_avatar);
+        imvAvatar = (ImageView) findViewById(R.id.img_avatar);
         findViewById(R.id.btn_home).setOnClickListener(this);
         findViewById(R.id.btn_search).setOnClickListener(this);
-        findViewById(R.id.btn_travel).setOnClickListener(this);
-        findViewById(R.id.btn_money).setOnClickListener(this);
+        /*findViewById(R.id.btn_travel).setOnClickListener(this);
+        findViewById(R.id.btn_money).setOnClickListener(this);*/
         findViewById(R.id.btn_other).setOnClickListener(this);
 
         if (homeFragment == null) {
             homeFragment = new HomeFragment();
         }
         replaceFragment(homeFragment);
-
-        /*Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if (bundle!=null){
-            String hello = (String)bundle.get("Name");
-            tvName.setText(hello);
-        }*/
     }
 
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
         Fragment f = getSupportFragmentManager()
                 .findFragmentByTag(fragment.getClass().getName());
         if (f != null && f == fragment) {
@@ -120,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_other:
-                if (otherFragment == null){
+                if (otherFragment == null) {
                     otherFragment = new OtherFragment();
                 }
                 replaceFragment(otherFragment);
@@ -133,5 +129,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        replaceFragment(homeFragment);
+
+    }
+    private void openAlertDiaLog(Context context) {
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setCancelable(true)
+                .setTitle("Show Dialog !")
+                .setMessage("Ban muon thoat khong ?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        System.exit(0);
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .create();
+        dialog.show();
     }
 }

@@ -1,5 +1,6 @@
-package dollar.com.travel_v;
+package dollar.com.travel_v.mien_bac;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,15 +8,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
+
+import dollar.com.travel_v.R;
 
 /**
  * Created by anhch_000 on 21/03/2017.
  */
 
-public class MienBacAdapter extends RecyclerView.Adapter<MienBacAdapter.ViewHolder> {
-
+public class
+MienBacAdapter extends RecyclerView.Adapter<MienBacAdapter.ViewHolder> {
+    private Context context;
     private ArrayList<MienBac> mienBacs;
+
+    public MienBacAdapter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,7 +39,9 @@ public class MienBacAdapter extends RecyclerView.Adapter<MienBacAdapter.ViewHold
         holder.id.setText(String.valueOf(mienBac.getId()));
         holder.name.setText(mienBac.getName());
         holder.title.setText(mienBac.getTitle());
-        holder.imageView.setImageBitmap(mienBac.getImageBitMap());
+        Glide.with(context)
+                .load(mienBac.getImageString())
+                .into(holder.imageView);
     }
 
     @Override

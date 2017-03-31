@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -59,15 +60,20 @@
         android:layout_marginBottom="30dp" />-->
     <Button
         android:id="@+id/btn_login_facebook"
-        android:text="Login with Facebook"
+        android:text="@string/login_with_facebook"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
         android:textAllCaps="false"
+        android:background="@drawable/bg_button"
         android:layout_width="match_parent"
-        android:layout_height="56dp" />
+        android:layout_height="40dp" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_login_google"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_button_google"
         android:visibility="visible"
         tools:visibility="visible" />
 </LinearLayout>

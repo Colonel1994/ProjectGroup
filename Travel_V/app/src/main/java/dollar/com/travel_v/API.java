@@ -18,12 +18,12 @@ import java.util.Map;
 public class API {
 
     public static final String SCHEME = "http";
-    public static final String HOST = "192.168.0.103";
+    public static final String HOST = "192.168.0.106";
     public static final String PATH = "WebService";
 
-    public static final String PATH_QUANLY = "mienbac/";
+    public static final String PATH_QUANLY = "MienBac/";
 
-    public static final String GET_QUAN_LY_URL = PATH_QUANLY + "mienbac.php";
+    public static final String GET_QUAN_LY_URL = PATH_QUANLY + "QuanLyGet.php";
 
 
     public static String callService(String url, Map<String, String> getParams) {

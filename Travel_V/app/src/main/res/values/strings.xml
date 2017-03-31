@@ -9,4 +9,12 @@
     <string name="disconnect">Disconnect</string>
     <string name="signed_out">signed_out</string>
     <string name="signed_in_fmt">Hello...!: %s</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="them_dia_diem">Thêm địa điểm</string>
+    <string name="thong_bao">Thông báo</string>
+    <string name="danh_gia_ung_dung">Đánh giá ứng dụng</string>
+    <string name="them_ban_be">Thêm bạn bè</string>
+    <string name="cai_dat">Cài đặt</string>
+    <string name="dang_nhap">Đăng nhập</string>
+    <string name="api_key">AIzaSyA3zEeIkhb9llfHiBAvicFnnZ3u3uEpRLc</string>
 </resources>

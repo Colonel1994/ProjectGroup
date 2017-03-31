@@ -7,14 +7,14 @@
     android:orientation="vertical"
     android:weightSum="2"
     tools:context="dollar.com.travel_v.MainActivity">
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/content"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.83">
-        <include layout="@layout/travel_home"
-           />
-    </RelativeLayout>
+        <!--<include layout="@layout/travel_home"/>-->
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
